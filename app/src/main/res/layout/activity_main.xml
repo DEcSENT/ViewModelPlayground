@@ -7,12 +7,130 @@
     tools:context=".presentation.ui.main.MainActivity">
 
     <TextView
+        android:id="@+id/main_screen_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Android developer" />
+
+    <TextView
+        android:id="@+id/main_screen_user_experience_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Experience: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/main_screen_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/main_screen_user_name" />
+
+    <TextView
+        android:id="@+id/main_screen_user_experience_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/main_screen_user_experience_text"
+        app:layout_constraintStart_toEndOf="@+id/main_screen_user_experience_text"
+        app:layout_constraintTop_toTopOf="@+id/main_screen_user_experience_text"
+        tools:text="20" />
+
+    <View
+        android:id="@+id/main_screen_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_screen_user_experience_text" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_screen_friends_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_screen_divider"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_friend" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_screen_error_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#ff0000"
+        app:layout_constraintBottom_toTopOf="@+id/main_screen_load_friends_button"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_screen_load_friends_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#00ff00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/main_screen_list_loader_group"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#6eff0000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/main_screen_friends_list"
+        app:layout_constraintEnd_toEndOf="@id/main_screen_friends_list"
+        app:layout_constraintStart_toStartOf="@id/main_screen_friends_list"
+        app:layout_constraintTop_toTopOf="@id/main_screen_friends_list"
+        tools:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/main_screen_list_loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </>
+
+    <ProgressBar
+        android:id="@+id/main_screen_user_loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/main_screen_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <android.support.constraint.Group
+        android:id="@+id/main_screen_user_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="main_screen_user_name, main_screen_user_experience_text,main_screen_user_experience_value"
+        tools:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>
