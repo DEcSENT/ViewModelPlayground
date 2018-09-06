@@ -33,15 +33,15 @@ global:
     - ADB_INSTALL_TIMEOUT=4    #Time out to 4 minutes
 
 before_install:
-- yes | sdkmanager "platforms;android-27"
+- yes | sdkmanager "platforms;android-28"
 
 install:
   - chmod +x ./gradlew
 
 script:
   - ./gradlew check
-  - ./gradlew jacocoTestReport
+  #- ./gradlew jacocoTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  ##- ./gradlew test jacocoTestReport coveralls
+  #- ./gradlew test jacocoTestReport coveralls
