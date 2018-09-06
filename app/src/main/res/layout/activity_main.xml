@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/main_screen_list_loader_group"
+        android:id="@+id/main_screen_friend_list_loader_group"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#6eff0000"
@@ -109,7 +109,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </>
+    </android.support.constraint.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/main_screen_user_loader"
@@ -129,7 +129,7 @@
         android:id="@+id/main_screen_user_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:constraint_referenced_ids="main_screen_user_name, main_screen_user_experience_text,main_screen_user_experience_value"
         tools:visibility="visible" />
 
