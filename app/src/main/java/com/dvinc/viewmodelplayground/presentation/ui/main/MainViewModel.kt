@@ -4,8 +4,9 @@ import android.arch.lifecycle.MutableLiveData
 import com.dvinc.viewmodelplayground.presentation.common.BaseViewModel
 import com.dvinc.viewmodelplayground.presentation.model.UserFriend
 import com.dvinc.viewmodelplayground.presentation.model.UserProfile
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+class MainViewModel @Inject constructor() : BaseViewModel() {
 
     val isUserLoading = MutableLiveData<Boolean>()
 
