@@ -24,7 +24,17 @@ class MainViewModel @Inject constructor(
     val userFriends = MutableLiveData<List<UserFriend>>()
 
     fun loadUserProfile() {
-        isUserLoading.value = true
+        addSubscription(profileRepository.obtainProfile()
+                .doOnSubscribe { isUserLoading.value = true }
+                .doOnSuccess { isUserLoading.value = false }
+                .subscribe(
+                        {
+                            userProfile.value = it
+                        },
+                        {
+                            it.printStackTrace()
+                        }
+                ))
     }
 
     fun loadUserFriends() {
