@@ -27,6 +27,7 @@ class MainViewModel @Inject constructor(
         addSubscription(profileRepository.obtainProfile()
                 .doOnSubscribe { isUserLoading.value = true }
                 .doOnSuccess { isUserLoading.value = false }
+                .doOnError { isUserLoading.value = false }
                 .subscribe(
                         {
                             userProfile.value = it
@@ -41,6 +42,7 @@ class MainViewModel @Inject constructor(
         addSubscription(friendsRepository.obtainFriends()
                 .doOnSubscribe { isFriendsLoading.value = true }
                 .doOnSuccess { isFriendsLoading.value = false }
+                .doOnError { isFriendsLoading.value = false }
                 .subscribe(
                         {
                             userFriends.value = it
