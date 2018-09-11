@@ -32,12 +32,23 @@ class MainViewModel @Inject constructor(
                             userProfile.value = it
                         },
                         {
-                            it.printStackTrace()
+                            errorData.value = it.message
                         }
                 ))
     }
 
     fun loadUserFriends() {
-        isFriendsLoading.value = true
+        addSubscription(friendsRepository.obtainFriends()
+                .doOnSubscribe { isFriendsLoading.value = true }
+                .doOnSuccess { isFriendsLoading.value = false }
+                .subscribe(
+                        {
+                            userFriends.value = it
+                        },
+                        {
+                            errorData.value = it.message
+                        }
+                )
+        )
     }
 }

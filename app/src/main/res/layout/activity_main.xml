@@ -51,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/main_screen_user_experience_text" />
 
     <android.support.v7.widget.RecyclerView
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         android:id="@+id/main_screen_friends_list"
         android:layout_width="0dp"
         android:layout_height="0dp"

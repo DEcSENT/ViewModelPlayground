@@ -5,13 +5,17 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import com.dvinc.viewmodelplayground.R
 import com.dvinc.viewmodelplayground.presentation.App
+import com.dvinc.viewmodelplayground.presentation.common.adapter.FriendItem
 import com.dvinc.viewmodelplayground.presentation.common.extension.toggleGone
 import com.dvinc.viewmodelplayground.presentation.common.extension.toggleVisible
 import com.dvinc.viewmodelplayground.presentation.model.UserFriend
 import com.dvinc.viewmodelplayground.presentation.model.UserProfile
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_main.main_screen_friends_list as friendsRecycler
 import kotlinx.android.synthetic.main.activity_main.main_screen_user_group as userInfoGroup
 import kotlinx.android.synthetic.main.activity_main.main_screen_load_friends_button as loadButton
 import kotlinx.android.synthetic.main.activity_main.main_screen_user_name as userName
@@ -27,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: MainViewModel
 
+    private val friendsAdapter = GroupAdapter<ViewHolder>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         initObservers(mainViewModel)
 
         setupLoadButton()
+        setupRecycler()
     }
 
     private fun initObservers(mainViewModel: MainViewModel) {
@@ -72,10 +79,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setFriendsLoading(isLoading: Boolean) {
         friendsLoader.toggleGone(isLoading)
+        friendsRecycler.toggleVisible(!isLoading)
     }
 
     private fun showError(message: String) {
-        //TODO: SHow error
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     private fun setUserProfile(profile: UserProfile) {
@@ -84,7 +92,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFriendsList(friends: List<UserFriend>) {
-        //TODO: Show list
+        friendsAdapter.addAll(friends.map {
+            FriendItem(it)
+        })
     }
 
     private fun setupLoadButton() {
@@ -92,5 +102,9 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.loadUserProfile()
             mainViewModel.loadUserFriends()
         }
+    }
+
+    private fun setupRecycler() {
+        friendsRecycler.adapter = friendsAdapter
     }
 }
